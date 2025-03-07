@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "ProductAPI.Protos";
+
+package product;
+
+//The service that exposes methods for retrieving products.
+service ProductService {
+    //Fetches all products
+    rpc GetProducts (Empty) returns (ProductList);
+    //Fetches products specific to a customer by customerId
+    rpc GetProductsByCustomerId (CustomerRequest) returns (ProductList);
+}
+
+message Empty {}
+
+//A message that holds the customer ID.
+message CustomerRequest {
+    int32 customerId = 1;
+}
+
+message Product {
+    int32 id = 1;
+    string name = 2;
+    double price = 3;
+}
+
+//A message that holds a list of products.
+message ProductList {
+    repeated Product products = 1;
+}
